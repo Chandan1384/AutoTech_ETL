@@ -1,0 +1,1603 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/25/2025 9:26:32 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MR_VENKEY_001"
+  DTS:CreatorName="MR_VENKEY_001\venka"
+  DTS:DTSID="{9964B6E9-ACC2-4B7A-9FDD-9244671A23A8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Inventory_Reconciliation"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{F6662C63-3D96-48E8-BA05-9E479DE26B38}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FF_ExceptionFilePath]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B60CD282-14A5-49E9-9E0C-B52C6E0924B0}"
+      DTS:ObjectName="FF_ExceptionFilePath">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"C:\\AutoTech_ETL\\Output\\Errors\\Inventory_Exception_" 
++ (DT_WSTR,4) YEAR(@[User::RunDate])
++ RIGHT("0" + (DT_WSTR,2) MONTH(@[User::RunDate]),2)
++ RIGHT("0" + (DT_WSTR,2) DAY(@[User::RunDate]),2)
++ ".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\AutoTech_ETL\Output\Errors\Inventory_Exception_20250902.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="INVENTORY_ID"
+              DTS:DTSID="{1B4D00F9-0B16-441B-BD15-FF12F027EF3D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PRODUCT_ID"
+              DTS:DTSID="{1F6E5544-9116-4BBD-B590-36D55E72F217}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LOCATION_ID"
+              DTS:DTSID="{9D313DE5-228E-46B2-A716-8239DE3121BA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CURRENT_STOCK"
+              DTS:DTSID="{A407271D-2B60-49A3-94ED-34A26F4706D4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REORDER_LEVEL"
+              DTS:DTSID="{AA31AA38-DB4F-4AD3-9037-26454BE8D035}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MAX_STOCK_LEVEL"
+              DTS:DTSID="{E8C341E5-0E08-494A-8CE3-C78814AAB5A1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SAFETY_STOCK"
+              DTS:DTSID="{13109ED5-95B3-477B-B941-2F0CBFA48C28}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="7"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LAST_MOVEMENT"
+              DTS:DTSID="{9C6B1BCE-2C87-4680-A0FA-882A04934DA5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="14"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UNIT_COST"
+              DTS:DTSID="{78DB8D65-4B92-4472-B636-387F7BDA13BF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="VARIANCE_TYPE"
+              DTS:DTSID="{44090389-648A-4C81-9B00-0F496128BE77}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IS_EXCEPTION"
+              DTS:DTSID="{602D5E5B-1599-4401-BB29-DB3365BE9B7F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FF_InventoryVariance]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{9BBC698B-481B-45AD-B266-4992D58559EB}"
+      DTS:ObjectName="FF_InventoryVariance">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"C:\\AutoTech_ETL\\Output\\Reports\\InventoryVariance_" 
++ (DT_WSTR,4) YEAR(GETDATE()) 
++ RIGHT("0" + (DT_WSTR,2) MONTH(GETDATE()),2) 
++ RIGHT("0" + (DT_WSTR,2) DAY(GETDATE()),2) 
++ ".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\AutoTech_ETL\Output\Reports\InventoryVariance_20250902.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="INVENTORY_ID"
+              DTS:DTSID="{7D809E39-BF9C-4E00-A97E-35A0BB4EE464}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PRODUCT_ID"
+              DTS:DTSID="{73E8D29F-2044-4736-A548-8792CAECAAD4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LOCATION_ID"
+              DTS:DTSID="{BC945793-D69E-4CF8-BAAD-1114572AFDAB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CURRENT_STOCK"
+              DTS:DTSID="{7AF54165-5557-4C67-9F2E-001DB05FA415}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REORDER_LEVEL"
+              DTS:DTSID="{89DCB1CB-484D-4868-BE8A-24FEBE021C31}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MAX_STOCK_LEVEL"
+              DTS:DTSID="{9FD859AF-0979-4021-A31E-DC1CC1D71487}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SAFETY_STOCK"
+              DTS:DTSID="{1586DDB0-A6B1-45FB-B3AD-486F9DBDE91A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="7"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LAST_MOVEMENT"
+              DTS:DTSID="{40610F56-696D-4FAB-A1DD-5A49245F20BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="14"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UNIT_COST"
+              DTS:DTSID="{E956997F-B0A5-4613-9A06-83DECEAF1C41}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="VARIANCE_TYPE"
+              DTS:DTSID="{11C0ABDE-F289-45E3-BB94-62FC00B83BF9}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Inventory_reconcile stock_log]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{AA91B059-E2B0-440A-9002-FD921C366249}"
+      DTS:ObjectName="Inventory_reconcile stock_log">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\AutoTech_ETL\Output\Logs\Inventory_reconcile stock.txt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Ora_Conn]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F6A3551D-6E68-4CE6-B9A7-DF289937D582}"
+      DTS:ObjectName="Ora_Conn">
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[$Package::p_ora_pwd]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost:1521/orcl;User ID=AUTO_TECH;Provider=OraOLEDB.Oracle.1;Persist Security Info=True;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="Inventory_reconcile stock_log"
+      DTS:CreationName="Microsoft.LogProviderTextFile"
+      DTS:Description="Writes log entries for events to a CSV file"
+      DTS:DTSID="{A8EF6F47-3B08-4267-899F-77D0E29A849F}"
+      DTS:ObjectName="SSIS log provider for Text files">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{24CA1B41-4A68-4CCF-8ADC-3C9368203754}"
+      DTS:ObjectName="p_ora_pwd">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Strong</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8CFCFEBA-ACBD-42DD-B632-6C9E6F5CA86E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExceptionFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{206F2B30-5063-4AAE-8116-C84AA044277B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunDate">
+      <DTS:VariableValue
+        DTS:DataType="7">9/2/2025 4:41:50 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{21FB052D-105B-4E10-9358-DC68523B7EE6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VarianceFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="2" />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Reconsile_stock"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A1B5F4DD-9A78-4108-BA47-7CD8D9AFB566}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Reconsile_stock"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="1">
+        <DTS:Property
+          DTS:DataType="8"
+          DTS:Name="EventFilter">4,7,OnError,13,OnInformation,13,OnPostExecute,12,OnPreExecute</DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnError"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnInformation"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPostExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPreExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:SelectedLogProviders>
+          <DTS:SelectedLogProvider
+            DTS:InstanceID="{A8EF6F47-3B08-4267-899F-77D0E29A849F}" />
+        </DTS:SelectedLogProviders>
+      </DTS:LoggingOptions>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Reconsile_stock\CS_VarianceException"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="CS_VarianceException"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Reconsile_stock\CS_VarianceException.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\CS_VarianceException.Inputs[Conditional Split Input].Columns[is_exception]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="is_exception"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Output].Columns[is_exception]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Reconsile_stock\CS_VarianceException.Outputs[ExceptionRows]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="ExceptionRows"
+                  synchronousInputId="Package\DFT_Reconsile_stock\CS_VarianceException.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Output].Columns[is_exception]} == "YES"</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">is_exception == "YES"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Reconsile_stock\CS_VarianceException.Outputs[VarianceRows]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="VarianceRows"
+                  synchronousInputId="Package\DFT_Reconsile_stock\CS_VarianceException.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Reconsile_stock\CS_VarianceException.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_Reconsile_stock\CS_VarianceException.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\CS_VarianceException.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Reconsile_stock\CS_VarianceException.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\CS_VarianceException.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Reconsile_stock\CS_VarianceException.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Reconsile_stock\DRV_IsException"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DRV_IsException"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Reconsile_stock\DRV_IsException.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_IsException.Inputs[Derived Column Input].Columns[variance_type]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="variance_type"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Output].Columns[variance_type]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Reconsile_stock\DRV_IsException.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Output].Columns[is_exception]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Output].Columns[is_exception]"
+                      name="is_exception"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Output].Columns[variance_type]} != "Normal" ? "YES" : "NO"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">variance_type != "Normal" ? "YES" : "NO"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Reconsile_stock\DRV_IsException.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Reconsile_stock\DRV_VarianceException"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DRV_VarianceException"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Inputs[Derived Column Input].Columns[CURRENT_STOCK]"
+                      cachedDataType="numeric"
+                      cachedName="CURRENT_STOCK"
+                      cachedPrecision="12"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[CURRENT_STOCK]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Inputs[Derived Column Input].Columns[REORDER_LEVEL]"
+                      cachedDataType="numeric"
+                      cachedName="REORDER_LEVEL"
+                      cachedPrecision="12"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[REORDER_LEVEL]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Inputs[Derived Column Input].Columns[MAX_STOCK_LEVEL]"
+                      cachedDataType="numeric"
+                      cachedName="MAX_STOCK_LEVEL"
+                      cachedPrecision="12"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[MAX_STOCK_LEVEL]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Inputs[Derived Column Input].Columns[SAFETY_STOCK]"
+                      cachedDataType="numeric"
+                      cachedName="SAFETY_STOCK"
+                      cachedPrecision="12"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[SAFETY_STOCK]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Reconsile_stock\DRV_VarianceException.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Output].Columns[variance_type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="13"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Output].Columns[variance_type]"
+                      name="variance_type"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(#{Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[CURRENT_STOCK]} &lt; #{Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[REORDER_LEVEL]}) ? "Below Reorder" : (#{Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[CURRENT_STOCK]} &gt; #{Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[MAX_STOCK_LEVEL]}) ? "Above Max" : (#{Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[CURRENT_STOCK]} &lt; #{Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[SAFETY_STOCK]}) ? "Below Safety" : "Normal"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(CURRENT_STOCK &lt; REORDER_LEVEL) ? "Below Reorder" : (CURRENT_STOCK &gt; MAX_STOCK_LEVEL) ? "Above Max" : (CURRENT_STOCK &lt; SAFETY_STOCK) ? "Below Safety" : "Normal"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Reconsile_stock\DRV_VarianceException.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Reconsile_stock\FF_ExceptionOut"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="16393"
+              name="FF_ExceptionOut"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[FF_ExceptionFilePath]"
+                  connectionManagerRefId="Package.ConnectionManagers[FF_ExceptionFilePath]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[INVENTORY_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="INVENTORY_ID"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[INVENTORY_ID]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[INVENTORY_ID]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[PRODUCT_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="PRODUCT_ID"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[PRODUCT_ID]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[PRODUCT_ID]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[LOCATION_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="LOCATION_ID"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[LOCATION_ID]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[LOCATION_ID]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[CURRENT_STOCK]"
+                      cachedDataType="numeric"
+                      cachedName="CURRENT_STOCK"
+                      cachedPrecision="12"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[CURRENT_STOCK]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[CURRENT_STOCK]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[REORDER_LEVEL]"
+                      cachedDataType="numeric"
+                      cachedName="REORDER_LEVEL"
+                      cachedPrecision="12"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[REORDER_LEVEL]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[REORDER_LEVEL]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[MAX_STOCK_LEVEL]"
+                      cachedDataType="numeric"
+                      cachedName="MAX_STOCK_LEVEL"
+                      cachedPrecision="12"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[MAX_STOCK_LEVEL]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[MAX_STOCK_LEVEL]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[SAFETY_STOCK]"
+                      cachedDataType="numeric"
+                      cachedName="SAFETY_STOCK"
+                      cachedPrecision="12"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[SAFETY_STOCK]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[SAFETY_STOCK]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[UNIT_COST]"
+                      cachedDataType="numeric"
+                      cachedName="UNIT_COST"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[UNIT_COST]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[UNIT_COST]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[variance_type]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="variance_type"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[VARIANCE_TYPE]"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Output].Columns[variance_type]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[is_exception]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="is_exception"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[IS_EXCEPTION]"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Output].Columns[is_exception]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].Columns[LAST_MOVEMENT_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LAST_MOVEMENT_DATE"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[LAST_MOVEMENT]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[LAST_MOVEMENT_DATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[INVENTORY_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="INVENTORY_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[PRODUCT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="PRODUCT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[LOCATION_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="LOCATION_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[CURRENT_STOCK]"
+                      dataType="i8"
+                      name="CURRENT_STOCK" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[REORDER_LEVEL]"
+                      dataType="i8"
+                      name="REORDER_LEVEL" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[MAX_STOCK_LEVEL]"
+                      dataType="i8"
+                      name="MAX_STOCK_LEVEL" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[SAFETY_STOCK]"
+                      dataType="i8"
+                      name="SAFETY_STOCK" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[LAST_MOVEMENT]"
+                      dataType="date"
+                      name="LAST_MOVEMENT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[UNIT_COST]"
+                      dataType="decimal"
+                      name="UNIT_COST" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[VARIANCE_TYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="VARIANCE_TYPE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input].ExternalColumns[IS_EXCEPTION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="IS_EXCEPTION" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\DFT_Reconsile_stock\FF_VarianceOut"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="16393"
+              name="FF_VarianceOut"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[FF_InventoryVariance]"
+                  connectionManagerRefId="Package.ConnectionManagers[FF_InventoryVariance]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[INVENTORY_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="INVENTORY_ID"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[INVENTORY_ID]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[INVENTORY_ID]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[PRODUCT_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="PRODUCT_ID"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[PRODUCT_ID]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[PRODUCT_ID]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[LOCATION_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="LOCATION_ID"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[LOCATION_ID]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[LOCATION_ID]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[CURRENT_STOCK]"
+                      cachedDataType="numeric"
+                      cachedName="CURRENT_STOCK"
+                      cachedPrecision="12"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[CURRENT_STOCK]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[CURRENT_STOCK]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[REORDER_LEVEL]"
+                      cachedDataType="numeric"
+                      cachedName="REORDER_LEVEL"
+                      cachedPrecision="12"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[REORDER_LEVEL]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[REORDER_LEVEL]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[MAX_STOCK_LEVEL]"
+                      cachedDataType="numeric"
+                      cachedName="MAX_STOCK_LEVEL"
+                      cachedPrecision="12"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[MAX_STOCK_LEVEL]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[MAX_STOCK_LEVEL]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[SAFETY_STOCK]"
+                      cachedDataType="numeric"
+                      cachedName="SAFETY_STOCK"
+                      cachedPrecision="12"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[SAFETY_STOCK]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[SAFETY_STOCK]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[UNIT_COST]"
+                      cachedDataType="numeric"
+                      cachedName="UNIT_COST"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[UNIT_COST]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[UNIT_COST]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[variance_type]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="variance_type"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[VARIANCE_TYPE]"
+                      lineageId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Output].Columns[variance_type]" />
+                    <inputColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].Columns[LAST_MOVEMENT_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LAST_MOVEMENT_DATE"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[LAST_MOVEMENT]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[LAST_MOVEMENT_DATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[INVENTORY_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="INVENTORY_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[PRODUCT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PRODUCT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[LOCATION_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LOCATION_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[CURRENT_STOCK]"
+                      dataType="i8"
+                      name="CURRENT_STOCK" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[REORDER_LEVEL]"
+                      dataType="i8"
+                      name="REORDER_LEVEL" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[MAX_STOCK_LEVEL]"
+                      dataType="i8"
+                      name="MAX_STOCK_LEVEL" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[SAFETY_STOCK]"
+                      dataType="i8"
+                      name="SAFETY_STOCK" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[LAST_MOVEMENT]"
+                      dataType="date"
+                      name="LAST_MOVEMENT" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[UNIT_COST]"
+                      dataType="decimal"
+                      name="UNIT_COST" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input].ExternalColumns[VARIANCE_TYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="VARIANCE_TYPE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\DFT_Reconsile_stock\inventory_master"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="inventory_master"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">"AUTO_TECH"."INVENTORY_MASTER"</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Reconsile_stock\inventory_master.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Ora_Conn]"
+                  connectionManagerRefId="Package.ConnectionManagers[Ora_Conn]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[INVENTORY_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[INVENTORY_ID]"
+                      length="20"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[INVENTORY_ID]"
+                      name="INVENTORY_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[PRODUCT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[PRODUCT_ID]"
+                      length="20"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[PRODUCT_ID]"
+                      name="PRODUCT_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[LOCATION_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[LOCATION_ID]"
+                      length="20"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[LOCATION_ID]"
+                      name="LOCATION_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[CURRENT_STOCK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[CURRENT_STOCK]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[CURRENT_STOCK]"
+                      name="CURRENT_STOCK"
+                      precision="12"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[REORDER_LEVEL]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[REORDER_LEVEL]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[REORDER_LEVEL]"
+                      name="REORDER_LEVEL"
+                      precision="12"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[MAX_STOCK_LEVEL]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[MAX_STOCK_LEVEL]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[MAX_STOCK_LEVEL]"
+                      name="MAX_STOCK_LEVEL"
+                      precision="12"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[SAFETY_STOCK]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[SAFETY_STOCK]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[SAFETY_STOCK]"
+                      name="SAFETY_STOCK"
+                      precision="12"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[LAST_MOVEMENT_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[LAST_MOVEMENT_DATE]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[LAST_MOVEMENT_DATE]"
+                      name="LAST_MOVEMENT_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[UNIT_COST]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[UNIT_COST]"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].Columns[UNIT_COST]"
+                      name="UNIT_COST"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[INVENTORY_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="INVENTORY_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[PRODUCT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="PRODUCT_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[LOCATION_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="LOCATION_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[CURRENT_STOCK]"
+                      dataType="numeric"
+                      name="CURRENT_STOCK"
+                      precision="12" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[REORDER_LEVEL]"
+                      dataType="numeric"
+                      name="REORDER_LEVEL"
+                      precision="12" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[MAX_STOCK_LEVEL]"
+                      dataType="numeric"
+                      name="MAX_STOCK_LEVEL"
+                      precision="12" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[SAFETY_STOCK]"
+                      dataType="numeric"
+                      name="SAFETY_STOCK"
+                      precision="12" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[LAST_MOVEMENT_DATE]"
+                      dataType="dbTimeStamp"
+                      name="LAST_MOVEMENT_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output].ExternalColumns[UNIT_COST]"
+                      dataType="numeric"
+                      name="UNIT_COST"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[INVENTORY_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[INVENTORY_ID]"
+                      name="INVENTORY_ID" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[PRODUCT_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[PRODUCT_ID]"
+                      name="PRODUCT_ID" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[LOCATION_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[LOCATION_ID]"
+                      name="LOCATION_ID" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[CURRENT_STOCK]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[CURRENT_STOCK]"
+                      name="CURRENT_STOCK"
+                      precision="12" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[REORDER_LEVEL]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[REORDER_LEVEL]"
+                      name="REORDER_LEVEL"
+                      precision="12" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[MAX_STOCK_LEVEL]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[MAX_STOCK_LEVEL]"
+                      name="MAX_STOCK_LEVEL"
+                      precision="12" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[SAFETY_STOCK]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[SAFETY_STOCK]"
+                      name="SAFETY_STOCK"
+                      precision="12" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[LAST_MOVEMENT_DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[LAST_MOVEMENT_DATE]"
+                      name="LAST_MOVEMENT_DATE" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[UNIT_COST]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[UNIT_COST]"
+                      name="UNIT_COST"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Reconsile_stock.Paths[Derived Column Output]"
+              endId="Package\DFT_Reconsile_stock\DRV_IsException.Inputs[Derived Column Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Reconsile_stock\DRV_VarianceException.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Reconsile_stock.Paths[Derived Column Output1]"
+              endId="Package\DFT_Reconsile_stock\CS_VarianceException.Inputs[Conditional Split Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Reconsile_stock\DRV_IsException.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Reconsile_stock.Paths[ExceptionRows]"
+              endId="Package\DFT_Reconsile_stock\FF_ExceptionOut.Inputs[Flat File Destination Input]"
+              name="ExceptionRows"
+              startId="Package\DFT_Reconsile_stock\CS_VarianceException.Outputs[ExceptionRows]" />
+            <path
+              refId="Package\DFT_Reconsile_stock.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Reconsile_stock\DRV_VarianceException.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Reconsile_stock\inventory_master.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT_Reconsile_stock.Paths[VarianceRows]"
+              endId="Package\DFT_Reconsile_stock\FF_VarianceOut.Inputs[Flat File Destination Input]"
+              name="VarianceRows"
+              startId="Package\DFT_Reconsile_stock\CS_VarianceException.Outputs[VarianceRows]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\DFT_Reconsile_stock"
+          TopLeft="642.499964895349,149.066665630076" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_Reconsile_stock">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\DFT_Reconsile_stock\DRV_IsException"
+          TopLeft="736.666626416976,227.066665087673" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\DFT_Reconsile_stock\FF_VarianceOut"
+          TopLeft="740.833292855986,410.799997143348" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\DFT_Reconsile_stock\DRV_VarianceException"
+          TopLeft="647.499964622161,150.799998951356" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\DFT_Reconsile_stock\FF_ExceptionOut"
+          TopLeft="1049.99994263053,418.599997089108" />
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\DFT_Reconsile_stock\CS_VarianceException"
+          TopLeft="810.833289031355,324.999997739991" />
+        <EdgeLayout
+          Id="Package\DFT_Reconsile_stock.Paths[ExceptionRows]"
+          TopLeft="933.233289031355,366.599997739991">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="196.366653599177,51.9999993491173"
+              Start="0,0"
+              End="196.366653599177,44.4999993491173">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.0666664029757" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.0666664029757"
+                    Point2="0,21.0666664029757"
+                    Point3="4,21.0666664029757" />
+                  <mssgle:LineSegment
+                    End="192.366653599177,21.0666664029757" />
+                  <mssgle:CubicBezierSegment
+                    Point1="192.366653599177,21.0666664029757"
+                    Point2="196.366653599177,21.0666664029757"
+                    Point3="196.366653599177,25.0666664029757" />
+                  <mssgle:LineSegment
+                    End="196.366653599177,44.4999993491173" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="64.5857486745885,26.0666664029757,67.19515625,11.3310546875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Reconsile_stock.Paths[Derived Column Output1]"
+          TopLeft="816.666626416976,268.666665087673">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="86.9666626143786,56.3333326523172"
+              Start="0,0"
+              End="86.9666626143786,48.8333326523172">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.1666663261586" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.1666663261586"
+                    Point2="0,28.1666663261586"
+                    Point3="4,28.1666663261586" />
+                  <mssgle:LineSegment
+                    End="82.9666626143786,28.1666663261586" />
+                  <mssgle:CubicBezierSegment
+                    Point1="82.9666626143786,28.1666663261586"
+                    Point2="86.9666626143786,28.1666663261586"
+                    Point3="86.9666626143786,32.1666663261586" />
+                  <mssgle:LineSegment
+                    End="86.9666626143786,48.8333326523172" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Reconsile_stock.Paths[Derived Column Output]"
+          TopLeft="743.899964622161,192.399998951356">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.766661794815,34.6666661363178"
+              Start="0,0"
+              End="72.766661794815,27.1666661363178">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.3333330681589" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.3333330681589"
+                    Point2="0,17.3333330681589"
+                    Point3="4,17.3333330681589" />
+                  <mssgle:LineSegment
+                    End="68.766661794815,17.3333330681589" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.766661794815,17.3333330681589"
+                    Point2="72.766661794815,17.3333330681589"
+                    Point3="72.766661794815,21.3333330681589" />
+                  <mssgle:LineSegment
+                    End="72.766661794815,27.1666661363178" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Reconsile_stock.Paths[VarianceRows]"
+          TopLeft="874.033289031355,366.599997739991">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-55.9999961753689,44.1999994033574"
+              Start="0,0"
+              End="-55.9999961753689,36.6999994033574">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.9066664249499" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.9066664249499"
+                    Point2="0,17.9066664249499"
+                    Point3="-4,17.9066664249499" />
+                  <mssgle:LineSegment
+                    End="-51.9999961753689,17.9066664249499" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-51.9999961753689,17.9066664249499"
+                    Point2="-55.9999961753689,17.9066664249499"
+                    Point3="-55.9999961753689,21.9066664249499" />
+                  <mssgle:LineSegment
+                    End="-55.9999961753689,36.6999994033574" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-59.5907598064344,22.9066664249499,63.1815234375,9.470703125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\DFT_Reconsile_stock\inventory_master"
+          TopLeft="748.958292412056,58.4999995931983" />
+        <EdgeLayout
+          Id="Package\DFT_Reconsile_stock.Paths[OLE DB Source Output]"
+          TopLeft="828.158292412056,100.099999593198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-84.2583277898951,50.6999993581577"
+              Start="0,0"
+              End="-84.2583277898951,43.1999993581577">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.3499996790789" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.3499996790789"
+                    Point2="0,25.3499996790789"
+                    Point3="-4,25.3499996790789" />
+                  <mssgle:LineSegment
+                    End="-80.2583277898951,25.3499996790789" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-80.2583277898951,25.3499996790789"
+                    Point2="-84.2583277898951,25.3499996790789"
+                    Point3="-84.2583277898951,29.3499996790789" />
+                  <mssgle:LineSegment
+                    End="-84.2583277898951,43.1999993581577" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Reconsile_stock\inventory_master">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

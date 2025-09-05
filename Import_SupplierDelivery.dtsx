@@ -1,0 +1,1371 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/25/2025 9:51:04 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MR_VENKEY_001"
+  DTS:CreatorName="MR_VENKEY_001\venka"
+  DTS:DTSID="{1A81D599-EAAC-415B-9F40-F22973AE2943}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Import_SupplierDelivery"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="57"
+  DTS:VersionGUID="{B4C576C8-E26B-4282-9E05-6AEC233A8352}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Archive]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{6E80E04A-E18F-423F-9C84-D757DC216D20}"
+      DTS:ObjectName="Archive">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::pInputArchive]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="C:\AutoTech_ETL\Input\Archive" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Cleaned]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{DB38B5D0-E552-4EE6-8A57-4EFC3ED493D1}"
+      DTS:ObjectName="Cleaned">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\AutoTech_ETL\Output\Reports\supp_perf_cleaned.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUPPLIER_ID"
+              DTS:DTSID="{58C52AA5-99CA-4284-BAEF-7DEC10F9603A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DELIVERY_DATE"
+              DTS:DTSID="{B1FE657B-F6F2-42C4-BBE2-2165CDE575BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PROMISED_DATE"
+              DTS:DTSID="{AB667B6F-5AF9-43BD-9D96-71302C6F955E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUALITY_RATING"
+              DTS:DTSID="{ED7E8FCF-3E08-4DB7-BF85-6D7CF7624ED3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUANTITY_DELIVERED"
+              DTS:DTSID="{6B60FBFA-EA31-465D-BD52-0FCB48D90510}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUANTITY_REJECTED"
+              DTS:DTSID="{97025CE5-855F-4000-A902-6D1320108A60}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Error]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{906143DB-FFD7-4A6D-90AB-6CF75D14BABE}"
+      DTS:ObjectName="Error">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::pOutputErrors]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\AutoTech_ETL\Output\Errors">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUPPLIER_ID"
+              DTS:DTSID="{E583F8B4-5FB5-4FA1-B800-09FF1EE5D406}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DELIVERY_DATE"
+              DTS:DTSID="{109425B8-277E-4E7E-8249-10367C4B17EC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PROMISED_DATE"
+              DTS:DTSID="{AFEC7E44-40AC-4C78-870C-7CFA703A9D95}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUALITY_RATING"
+              DTS:DTSID="{A45001BC-6268-401A-A87F-2B0DE61652EF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUANTITY_DELIVERED"
+              DTS:DTSID="{B7846253-5AAA-4C1F-84CB-A8B6F61728FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUANTITY_REJECTED"
+              DTS:DTSID="{9DA1DE8C-FCF8-43E5-A439-2DA4A8E71222}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorCode"
+              DTS:DTSID="{70701201-5959-464C-B5F1-95341B4AD97E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorColumn"
+              DTS:DTSID="{3DCF3BB6-1182-482C-8CF3-359F545F9E5B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{7F416D91-3C8E-4F8F-97CC-5EFB8A8597A7}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\AutoTech_ETL\Output\Errors\Error.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUPPLIER_ID"
+              DTS:DTSID="{E388E135-A235-49B8-925A-9E8618FF5E53}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DELIVERY_DATE"
+              DTS:DTSID="{0E782800-FF16-42E2-874D-2654391F78D8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PROMISED_DATE"
+              DTS:DTSID="{AF8EA836-7CF2-45F6-9C4E-A02C17AE2AB2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUALITY_RATING"
+              DTS:DTSID="{16CE556B-0ADA-4790-99EE-88D94B2D92CD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUANTITY_DELIVERED"
+              DTS:DTSID="{2C20166C-FA75-4D4A-BB74-6F84983E9D25}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUANTITY_REJECTED"
+              DTS:DTSID="{5AF16D6B-9444-4A27-8F34-911AC2BF9B89}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ORA_CONN]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D9AB0002-BBC9-4529-9D5B-65179F16EA29}"
+      DTS:ObjectName="ORA_CONN">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost:1521/orcl;User ID=auto_tech;Provider=OraOLEDB.Oracle.1;Persist Security Info=True;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[staging]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{650DB3BD-AB3E-4DFF-999C-F1079C8B0D13}"
+      DTS:ObjectName="staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\AutoTech_ETL\Input\Staging\Supplier_Perfomance_raw.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PERFORMANCE_ID"
+              DTS:DTSID="{8A2E26A4-D4B8-48F0-B624-A3EC0ED07497}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUPPLIER_ID"
+              DTS:DTSID="{28D546D0-C514-4549-8704-CA01177F55D2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PO_NUMBER"
+              DTS:DTSID="{06E79806-5165-40E9-807B-27AD0FE600E9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DELIVERY_DATE"
+              DTS:DTSID="{18DBF26A-5D04-4DCE-8B5D-46A629A6D381}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PROMISED_DATE"
+              DTS:DTSID="{689E47C7-907B-42C0-95C4-1A71B4401ABE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUALITY_RATING"
+              DTS:DTSID="{13525BD3-DE43-4E17-8E86-4D258D2E7E64}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUANTITY_DELIVERED"
+              DTS:DTSID="{E0D16095-A59E-4AAB-8486-4C04C6E8D5F0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QUANTITY_REJECTED"
+              DTS:DTSID="{F87C4483-ACA8-46CF-A59A-61335E0694ED}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PERFORMANCE_MONTH"
+              DTS:DTSID="{24B72B48-2E3B-49BB-8F18-F64552905BB1}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{84DEFAC7-21BC-4742-8384-F9FA00A37B0E}"
+      DTS:ObjectName="pConfigParams">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\AutoTech_ETL\Config\Parameters</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{D0226B90-F5CA-48E6-8011-BB10CA65BA24}"
+      DTS:ObjectName="pInputArchive">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\AutoTech_ETL\Input\Archive</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{04DFE803-9A4E-40DA-BF97-01631ED96940}"
+      DTS:ObjectName="pInputStaging">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\AutoTech_ETL\Input\Staging</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{1A85F24B-14FF-4C2E-B151-45FBC1B8A81C}"
+      DTS:ObjectName="pOutputErrors">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\AutoTech_ETL\Output\Errors</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{EA066898-AFEC-4643-AEEE-18B1679E47FA}"
+      DTS:ObjectName="pOutputLogs">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\AutoTech_ETL\Output\Logs</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{3A17B170-9EB0-40AE-8250-7282D444DB7E}"
+      DTS:ObjectName="pOutputReports">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\AutoTech_ETL\Output\Reports</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{1AC337EC-3130-40DC-B4D6-584C46553711}"
+      DTS:ObjectName="pTempWorking">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\AutoTech_ETL\Temp\Working</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{D08682BE-5CE0-4BE5-BFE1-D1EB0663F96F}"
+      DTS:ObjectName="p_file_root">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\AutoTech_ETL</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{0052FFB7-6627-4195-B226-183CC65C450D}"
+      DTS:ObjectName="p_ora_host">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">localhost</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{678E92AE-790F-4E32-948D-45ABB5B61A53}"
+      DTS:ObjectName="p_ora_port">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">1521</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{1A254894-D99C-4C3B-8452-1A25F269EB6B}"
+      DTS:ObjectName="p_ora_pwd">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Strong</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{BAEA5C29-C112-4A89-B0EF-CFC47A2C396D}"
+      DTS:ObjectName="p_ora_service">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">orcl</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5E3E9194-AE9D-4050-8908-D9B7B6B9D7D7}"
+      DTS:ObjectName="p_ora_user">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">AUTO_TECH</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Staging to Archieve"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{83C67223-07E3-47B9-8DBC-3D56B8FFA0D2}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Staging to Archieve"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="MoveFile"
+          TaskSourcePath="{650DB3BD-AB3E-4DFF-999C-F1079C8B0D13}"
+          TaskDestinationPath="{6E80E04A-E18F-423F-9C84-D757DC216D20}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Supplier_delivery_data"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{66B924E1-C5D0-4CA1-8B65-E079CE64B209}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Supplier_delivery_data"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Supplier_delivery_data\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Supplier_delivery_data\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Conditional Split.Inputs[Conditional Split Input].Columns[SUPPLIER_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SUPPLIER_ID"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[SUPPLIER_ID]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Conditional Split.Inputs[Conditional Split Input].Columns[DELIVERY_DATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="DELIVERY_DATE"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[DELIVERY_DATE]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Conditional Split.Inputs[Conditional Split Input].Columns[PROMISED_DATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROMISED_DATE"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[PROMISED_DATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Supplier_delivery_data\Conditional Split.Outputs[error]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="RedirectRow"
+                  exclusionGroup="1"
+                  name="error"
+                  synchronousInputId="Package\Supplier_delivery_data\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[SUPPLIER_ID]}) || [TRIM](#{Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[SUPPLIER_ID]}) == "" || [ISNULL](#{Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[DELIVERY_DATE]}) || [TRIM](#{Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[DELIVERY_DATE]}) == "" || [ISNULL](#{Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[PROMISED_DATE]}) || [TRIM](#{Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[PROMISED_DATE]}) == ""</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(SUPPLIER_ID) || TRIM(SUPPLIER_ID) == "" || ISNULL(DELIVERY_DATE) || TRIM(DELIVERY_DATE) == "" || ISNULL(PROMISED_DATE) || TRIM(PROMISED_DATE) == ""</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Supplier_delivery_data\Conditional Split.Outputs[Clean split]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Clean split"
+                  synchronousInputId="Package\Supplier_delivery_data\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Supplier_delivery_data\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Supplier_delivery_data\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Supplier_delivery_data\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Supplier_delivery_data\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Supplier_delivery_data\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="16393"
+              name="Flat File Destination"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Supplier_delivery_data\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Cleaned]"
+                  connectionManagerRefId="Package.ConnectionManagers[Cleaned]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].Columns[SUPPLIER_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SUPPLIER_ID"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SUPPLIER_ID]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[SUPPLIER_ID]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].Columns[DELIVERY_DATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="DELIVERY_DATE"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DELIVERY_DATE]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[DELIVERY_DATE]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].Columns[PROMISED_DATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROMISED_DATE"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PROMISED_DATE]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[PROMISED_DATE]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].Columns[QUALITY_RATING]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="QUALITY_RATING"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QUALITY_RATING]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUALITY_RATING]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].Columns[QUANTITY_DELIVERED]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="QUANTITY_DELIVERED"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY_DELIVERED]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUANTITY_DELIVERED]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].Columns[QUANTITY_REJECTED]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="QUANTITY_REJECTED"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY_REJECTED]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUANTITY_REJECTED]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SUPPLIER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SUPPLIER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DELIVERY_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DELIVERY_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PROMISED_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROMISED_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QUALITY_RATING]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUALITY_RATING" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY_DELIVERED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUANTITY_DELIVERED" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY_REJECTED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUANTITY_REJECTED" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Supplier_delivery_data\Null records"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="16393"
+              name="Null records"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Supplier_delivery_data\Null records.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].Columns[SUPPLIER_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SUPPLIER_ID"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[SUPPLIER_ID]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[SUPPLIER_ID]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].Columns[DELIVERY_DATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="DELIVERY_DATE"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[DELIVERY_DATE]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[DELIVERY_DATE]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].Columns[PROMISED_DATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PROMISED_DATE"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[PROMISED_DATE]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[PROMISED_DATE]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].Columns[QUALITY_RATING]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="QUALITY_RATING"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[QUALITY_RATING]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUALITY_RATING]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].Columns[QUANTITY_DELIVERED]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="QUANTITY_DELIVERED"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY_DELIVERED]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUANTITY_DELIVERED]" />
+                    <inputColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].Columns[QUANTITY_REJECTED]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="QUANTITY_REJECTED"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY_REJECTED]"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUANTITY_REJECTED]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[SUPPLIER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SUPPLIER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[DELIVERY_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DELIVERY_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[PROMISED_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROMISED_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[QUALITY_RATING]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUALITY_RATING" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY_DELIVERED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUANTITY_DELIVERED" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input].ExternalColumns[QUANTITY_REJECTED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUANTITY_REJECTED" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Supplier_delivery_data\Raw source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="16393"
+              name="Raw source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Supplier_delivery_data\Raw source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[staging]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[SUPPLIER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[SUPPLIER_ID]"
+                      length="50"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[SUPPLIER_ID]"
+                      name="SUPPLIER_ID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[DELIVERY_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[DELIVERY_DATE]"
+                      length="50"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[DELIVERY_DATE]"
+                      name="DELIVERY_DATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[PROMISED_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[PROMISED_DATE]"
+                      length="50"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[PROMISED_DATE]"
+                      name="PROMISED_DATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUALITY_RATING]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[QUALITY_RATING]"
+                      length="50"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUALITY_RATING]"
+                      name="QUALITY_RATING"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUANTITY_DELIVERED]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[QUANTITY_DELIVERED]"
+                      length="50"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUANTITY_DELIVERED]"
+                      name="QUANTITY_DELIVERED"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUANTITY_REJECTED]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[QUANTITY_REJECTED]"
+                      length="50"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].Columns[QUANTITY_REJECTED]"
+                      name="QUANTITY_REJECTED"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[PERFORMANCE_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PERFORMANCE_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[SUPPLIER_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SUPPLIER_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[PO_NUMBER]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PO_NUMBER" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[DELIVERY_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DELIVERY_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[PROMISED_DATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PROMISED_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[QUALITY_RATING]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUALITY_RATING" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[QUANTITY_DELIVERED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUANTITY_DELIVERED" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[QUANTITY_REJECTED]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QUANTITY_REJECTED" />
+                    <externalMetadataColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output].ExternalColumns[PERFORMANCE_MONTH]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PERFORMANCE_MONTH" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Supplier_delivery_data.Paths[Clean split]"
+              endId="Package\Supplier_delivery_data\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="Clean split"
+              startId="Package\Supplier_delivery_data\Conditional Split.Outputs[Clean split]" />
+            <path
+              refId="Package\Supplier_delivery_data.Paths[error]"
+              endId="Package\Supplier_delivery_data\Null records.Inputs[Flat File Destination Input]"
+              name="error"
+              startId="Package\Supplier_delivery_data\Conditional Split.Outputs[error]" />
+            <path
+              refId="Package\Supplier_delivery_data.Paths[Flat File Source Output]"
+              endId="Package\Supplier_delivery_data\Conditional Split.Inputs[Conditional Split Input]"
+              name="Flat File Source Output"
+              startId="Package\Supplier_delivery_data\Raw source.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7C38E713-CE1F-447C-900C-D55DA54770B3}"
+      DTS:From="Package\Supplier_delivery_data"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Staging to Archieve" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Staging to Archieve"
+          TopLeft="979.166613167361,239.199998336633" />
+        <NodeLayout
+          Size="184,41.6"
+          Id="Package\Supplier_delivery_data"
+          TopLeft="729.166626826758,110.933332561917" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="821.166626826758,152.533332561917">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="242.399986340603,86.666665774716"
+              Start="0,0"
+              End="242.399986340603,79.166665774716">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.333332887358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.333332887358"
+                    Point2="0,43.333332887358"
+                    Point3="4,43.333332887358" />
+                  <mssgle:LineSegment
+                    End="238.399986340603,43.333332887358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="238.399986340603,43.333332887358"
+                    Point2="242.399986340603,43.333332887358"
+                    Point3="242.399986340603,47.333332887358" />
+                  <mssgle:LineSegment
+                    End="242.399986340603,79.166665774716" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Supplier_delivery_data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Supplier_delivery_data\Conditional Split"
+          TopLeft="723.333293812144,179.399998752475" />
+        <NodeLayout
+          Size="133.6,41.6"
+          Id="Package\Supplier_delivery_data\Null records"
+          TopLeft="1056.66660893295,195.866665304634" />
+        <NodeLayout
+          Size="132.8,41.6"
+          Id="Package\Supplier_delivery_data\Raw source"
+          TopLeft="601.666633793051,68.4666661905581" />
+        <EdgeLayout
+          Id="Package\Supplier_delivery_data.Paths[Flat File Source Output]"
+          TopLeft="668.066633793051,110.066666190558">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="132.066660019093,69.3333325619169"
+              Start="0,0"
+              End="132.066660019093,61.8333325619169">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.6666662809585" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.6666662809585"
+                    Point2="0,34.6666662809585"
+                    Point3="4,34.6666662809585" />
+                  <mssgle:LineSegment
+                    End="128.066660019093,34.6666662809585" />
+                  <mssgle:CubicBezierSegment
+                    Point1="128.066660019093,34.6666662809585"
+                    Point2="132.066660019093,34.6666662809585"
+                    Point3="132.066660019093,38.6666662809585" />
+                  <mssgle:LineSegment
+                    End="132.066660019093,61.8333325619169" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Supplier_delivery_data.Paths[error]"
+          TopLeft="876.933293812144,200.199998752475">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="179.733315120806,16.466666552159"
+              Start="0,0"
+              End="172.233315120806,16.466666552159">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="85.866657560403,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="85.866657560403,0"
+                    Point2="89.866657560403,0"
+                    Point3="89.866657560403,4" />
+                  <mssgle:LineSegment
+                    End="89.866657560403,12.466666552159" />
+                  <mssgle:CubicBezierSegment
+                    Point1="89.866657560403,12.466666552159"
+                    Point2="89.866657560403,16.466666552159"
+                    Point3="93.866657560403,16.466666552159" />
+                  <mssgle:LineSegment
+                    End="172.233315120806,16.466666552159" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="78.288356779153,-13.7568359375,23.1566015625,7.7568359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Supplier_delivery_data\Flat File Destination"
+          TopLeft="704.629591130366,312.962960786658" />
+        <EdgeLayout
+          Id="Package\Supplier_delivery_data.Paths[Clean split]"
+          TopLeft="800.133293812144,220.999998752475">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.3037026817782,91.9629620341825"
+              Start="0,0"
+              End="-10.3037026817782,84.4629620341825">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.9814810170913" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.9814810170913"
+                    Point2="0,45.9814810170913"
+                    Point3="-4,45.9814810170913" />
+                  <mssgle:LineSegment
+                    End="-6.30370268177819,45.9814810170913" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.30370268177819,45.9814810170913"
+                    Point2="-10.3037026817782,45.9814810170913"
+                    Point3="-10.3037026817782,49.9814810170913" />
+                  <mssgle:LineSegment
+                    End="-10.3037026817782,84.4629620341825" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-28.7007575908891,50.9814810170913,47.0978125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
